@@ -1,18 +1,29 @@
+from contextlib import asynccontextmanager
 import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, RedirectResponse
 
-from api.exceptions.message_exception import MessageException
+from core.application.exceptions.message_exception import MessageException
+from core.infrastructure.singleton.configure import configure_singleton
+from api.features.categories.routes import router as category_router
 
 # --------------------------- Variables ---------------------------
 is_dev = True
 
 # -----------------------------------------------------------------
+# -------------------------- Life Cycle ---------------------------
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    await configure_singleton()
+    yield
+
 
 # --------------------------- Main App ----------------------------
 
-app = FastAPI(title="Authentication Service API")
+app = FastAPI(title="Library Service API", lifespan=lifespan)
 
 
 # -----------------------------------------------------------------
@@ -30,6 +41,8 @@ app.add_middleware(
 # -----------------------------------------------------------------
 
 # ------------------------- Include Routers -----------------------
+
+app.include_router(category_router)
 
 
 @app.get("/redirect")
