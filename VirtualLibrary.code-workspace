@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "./back/library/app",
+			"name": "Library Back"
+		},
+		{
+			"path": "./front",
+			"name": "Library Front"
+		}
+	],
+	"settings": {}
+}

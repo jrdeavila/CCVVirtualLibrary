@@ -1,0 +1,17 @@
+version: '3.7'
+
+services:
+  backend-library:
+    build: 
+      context: back/library
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8000
+    volumes:
+      - ./back/library/app:/app
+    environment:
+      - DB_USER=${MYSQL_USER}
+      - DB_PASSWORD=${MYSQL_PASSWORD}
+      - DB_HOST=${MYSQL_HOST}
+      - DB_PORT=${MYSQL_PORT}
+      - DB_NAME=${MYSQL_DBNAME}
