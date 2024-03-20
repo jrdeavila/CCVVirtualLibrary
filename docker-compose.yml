@@ -1,6 +1,15 @@
 version: '3.7'
 
 services:
+  frontend-library:
+    build: 
+      context: front
+      dockerfile: docker/development 
+    ports:
+      - 3000:80
+    volumes:
+      - ./front/app:/usr/src/app
+
   backend-library:
     build: 
       context: back/library
