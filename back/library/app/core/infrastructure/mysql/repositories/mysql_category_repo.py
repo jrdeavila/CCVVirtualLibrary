@@ -17,7 +17,7 @@ class MySQLCategoryRepo(CategoryRepo):
 
     async def get_categories(self) -> list[Category]:
         session = Session(self._engine)
-        stmt = select(MySQLCategoryModel).join(MySQLSubCategoryModel)
+        stmt = select(MySQLCategoryModel)
         items = session.scalars(stmt)
         return [item.to_category() for item in items]
 

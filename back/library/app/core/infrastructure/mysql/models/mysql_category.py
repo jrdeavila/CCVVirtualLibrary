@@ -12,7 +12,6 @@ class MySQLCategoryModel(Base):
     code: Mapped[str] = mapped_column(String(10), name="codigo")
     subcategories: Mapped[List["MySQLSubCategoryModel"]] = relationship(
         "MySQLSubCategoryModel",
-        primaryjoin="MySQLCategoryModel.id == MySQLSubCategoryModel.category_id",
     )
 
     def __repr__(self) -> str:
