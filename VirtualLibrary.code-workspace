@@ -5,7 +5,7 @@
 			"name": "Library Back"
 		},
 		{
-			"path": "./front",
+			"path": "./front/app",
 			"name": "Library Front"
 		}
 	],
