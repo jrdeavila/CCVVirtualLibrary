@@ -24,3 +24,11 @@ services:
       - DB_HOST=${MYSQL_HOST}
       - DB_PORT=${MYSQL_PORT}
       - DB_NAME=${MYSQL_DBNAME}
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    
+  redis:
+    image: redis:alpine
+    ports:
+      - 6379:6379
+    

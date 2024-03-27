@@ -17,10 +17,6 @@ class MySQLCategoryModel(Base):
     def __repr__(self) -> str:
         return f"MySQLCategoryModel(id={self.id!r}, name={self.name!r}, code={self.code!r})"
 
-    @staticmethod
-    def from_category(category: Category) -> "MySQLCategoryModel":
-        return from_category(category)
-
     def to_category(self) -> "Category":
         return to_category(self)
 
@@ -44,17 +40,9 @@ class MySQLSubCategoryModel(Base):
         return to_subcategory(self)
 
 
-def from_category(category: Category) -> MySQLCategoryModel:
-    return MySQLCategoryModel(
-        id=category.id,
-        name=category.name,
-        code=category.code,
-    )
-
-
 def to_subcategory(model: MySQLSubCategoryModel) -> SubCategory:
     return SubCategory(
-        subcategory_id=model.id,
+        id=model.id,
         name=model.name,
         code=model.code,
         category_id=model.category_id,
@@ -63,7 +51,7 @@ def to_subcategory(model: MySQLSubCategoryModel) -> SubCategory:
 
 def to_category(model: MySQLCategoryModel) -> Category:
     return Category(
-        category_id=model.id,
+        id=model.id,
         name=model.name,
         code=model.code,
         subcategories=[item.to_subcategory() for item in model.subcategories],

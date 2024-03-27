@@ -5,7 +5,6 @@ from pydantic import BaseModel, Field
 class SubCategory(BaseModel):
     id: int = Field(
         ...,
-        alias="subcategory_id",
         title="SubCategory ID",
         description="The ID of the subcategory",
     )
@@ -18,16 +17,18 @@ class SubCategory(BaseModel):
 
     category_id: int = Field(
         ...,
-        alias="category_id",
         title="Category ID",
         description="The ID of the category",
     )
+
+    @classmethod
+    def empty(cls) -> "SubCategory":
+        return cls(id=0, name="No asignado", code="NA", category_id=0)
 
 
 class Category(BaseModel):
     id: int = Field(
         ...,
-        alias="category_id",
         title="Category ID",
         description="The ID of the category",
     )
