@@ -5,7 +5,6 @@ from core.domain.entities.category import Category
 from core.domain.repositories.category_repo import CategoryRepo
 from core.infrastructure.mysql.models.mysql_category import (
     MySQLCategoryModel,
-    MySQLSubCategoryModel,
 )
 
 

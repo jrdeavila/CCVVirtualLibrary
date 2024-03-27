@@ -1,12 +1,16 @@
 from contextlib import asynccontextmanager
 import uvicorn
+import concurrent.futures
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, RedirectResponse
 
 from core.application.exceptions.message_exception import MessageException
+from core.application.services.backgrond_task_service import BackgroundTaskService
 from core.infrastructure.singleton.configure import configure_singleton
 from api.features.categories.routes import router as category_router
+from api.features.documents.routes import router as document_router
+from core.infrastructure.singleton.container import SingletonContainer
 
 # --------------------------- Variables ---------------------------
 is_dev = True
@@ -18,7 +22,11 @@ is_dev = True
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     await configure_singleton()
+    task_service = SingletonContainer.resolve(BackgroundTaskService)
+    task_thread = concurrent.futures.ThreadPoolExecutor()
+    task_thread.submit(task_service.run)
     yield
+    task_service.stop()
 
 
 # --------------------------- Main App ----------------------------
@@ -43,6 +51,7 @@ app.add_middleware(
 # ------------------------- Include Routers -----------------------
 
 app.include_router(category_router)
+app.include_router(document_router)
 
 
 @app.get("/redirect")
