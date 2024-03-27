@@ -5,7 +5,7 @@ import os
 from redis import Redis
 from sqlalchemy import Engine
 
-from core.application.services.backgrond_task_service import BackgroundTaskService
+from core.application.services.background_task_service import BackgroundTaskService
 from core.application.services.cache_service import CacheService
 from core.application.services.category_service import CategoryServiceImpl
 from core.application.services.document_service import DocumentServiceImpl
@@ -41,7 +41,12 @@ async def configure_singleton():
         CategoryRepo, MySQLCategoryRepo(SingletonContainer.resolve(Engine))
     )
     SingletonContainer.register(
-        CategoryService, CategoryServiceImpl(SingletonContainer.resolve(CategoryRepo))
+        CategoryService,
+        CategoryServiceImpl(
+            category_repo=SingletonContainer.resolve(CategoryRepo),
+            background_task_service=SingletonContainer.resolve(BackgroundTaskService),
+            cache_service=SingletonContainer.resolve(CacheService),
+        ),
     )
     SingletonContainer.register(
         DocumentRepo, MySQLDocumentRepo(SingletonContainer.resolve(Engine))

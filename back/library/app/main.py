@@ -1,4 +1,5 @@
 from contextlib import asynccontextmanager
+from sqlalchemy import Engine
 import uvicorn
 import concurrent.futures
 from fastapi import FastAPI
@@ -6,7 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, RedirectResponse
 
 from core.application.exceptions.message_exception import MessageException
-from core.application.services.backgrond_task_service import BackgroundTaskService
+from core.application.services.background_task_service import BackgroundTaskService
 from core.infrastructure.singleton.configure import configure_singleton
 from api.features.categories.routes import router as category_router
 from api.features.documents.routes import router as document_router
@@ -27,6 +28,7 @@ async def lifespan(app: FastAPI):
     task_thread.submit(task_service.run)
     yield
     task_service.stop()
+    SingletonContainer.resolve(Engine).dispose()
 
 
 # --------------------------- Main App ----------------------------

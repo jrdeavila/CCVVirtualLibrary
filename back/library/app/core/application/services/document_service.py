@@ -1,5 +1,5 @@
 import sys
-from core.application.services.backgrond_task_service import BackgroundTaskService
+from core.application.services.background_task_service import BackgroundTaskService
 from core.application.services.cache_service import CacheService
 from core.domain.entities.document import Document
 from core.domain.repositories.document_repo import DocumentRepo
@@ -34,9 +34,13 @@ class DocumentServiceImpl(DocumentService):
 
     def __refresh_cache__(self, items: list[Document], query: str | None) -> None:
         data = [item.model_dump() for item in items]
-        self._background_task_service.submit_task(self.__get_documents__, data, query)
+        self._background_task_service.submit_task(
+            self.__save_cache_documents__, data, query
+        )
 
-    async def __get_documents__(self, items: list[dict], query: str | None) -> None:
+    async def __save_cache_documents__(
+        self, items: list[dict], query: str | None
+    ) -> None:
         await self._cache_service.save_collection_docs(
             "documents", items, query if query else "all"
         )
