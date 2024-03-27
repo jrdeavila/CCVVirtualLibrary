@@ -9,16 +9,13 @@ WORKDIR /usr/src/app
 COPY app/package*.json ./
 COPY app/* ./ 
 
-RUN yarn install
+RUN npm install
 
-# Bundle app source
-
-COPY . .
 
 # Run the app in development mode or production mode
 
-CMD [ "yarn", "dev", "--host", "0.0.0.0", "--port", "80" ]
+CMD [ "npm", "run", "dev", "--host", "0.0.0.0", "--port", "80" ]
 
 # Make port 5173 available to the world outside this container
 
-EXPOSE 5173
+EXPOSE 80

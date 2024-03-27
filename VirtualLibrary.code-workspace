@@ -9,5 +9,7 @@
 			"name": "Library Front"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "Library Front"
+	}
 }
