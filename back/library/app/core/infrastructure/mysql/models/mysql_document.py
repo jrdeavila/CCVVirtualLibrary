@@ -18,6 +18,9 @@ class MySQLDocumentModel(Base):
     status: Mapped[str] = mapped_column(String(20), name="estado")
     quantity: Mapped[int] = mapped_column(name="cantidad")
     type: Mapped[str] = mapped_column(String(20), name="tipo")
+    status: Mapped[str] = mapped_column(String(20), name="estado")
+    image: Mapped[str] = mapped_column(String(255), name="imagen")
+    pdf: Mapped[str] = mapped_column(String(255), name="url")
 
     subcategory_id: Mapped[int] = mapped_column(
         ForeignKey("subcategoria.id"), name="idsubcategoria"
@@ -43,6 +46,8 @@ def to_document(model: MySQLDocumentModel) -> Document:
         source=model.source,
         status=model.status,
         quantity=model.quantity,
+        image=model.image,
+        pdf=model.pdf,
         subcategory=(
             model.foreign_subcategory_model.to_subcategory()
             if model.foreign_subcategory_model
