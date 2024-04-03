@@ -42,3 +42,15 @@ class Document(BaseModel):
         title="Document Subcategory",
         description="The subcategory of the document",
     )
+
+    image: str = Field(
+        ...,
+        title="Document Image",
+        description="The image of the document",
+    )
+
+    pdf: str = Field(
+        ...,
+        title="Document PDF",
+        description="The PDF of the document",
+    )
