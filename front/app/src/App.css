@@ -1,10 +1,10 @@
-.container{
-  width: 1000px;
-}
 .nombreLibro{
   font-size: 18px;
+  text-transform:lowercase;
+  
 }
-.espacioLibro{
-  width: 33%;
-  height: auto;
+.foto_libro{
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
 }

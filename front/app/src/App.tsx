@@ -13,7 +13,7 @@ function App() {
   // --------------------------------------------------------------
   const getDocuments = async () => {
     let res = await fetchDocuments({
-      count: 10,
+      count: 50,
       page: 1,
       query: "",
     });
@@ -23,7 +23,7 @@ function App() {
   };
   // --------------------------------------------------------------
   return (
-    <div className="container">
+    <div className="d-flex flex-wrap justify-content-around">
       {docs.map((e: DocumentModel, i: number) => (
         <Libro key={i} nombre={e.title} doc_url={e.pdf} image_url={e.image} />
       ))}
