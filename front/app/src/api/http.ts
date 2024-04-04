@@ -24,6 +24,20 @@ export const get = async (
   }
 };
 
+export const get2 = async (endpoint: string) => {
+  try {
+    const response = await fetch(`${apiUrl}/${endpoint}`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return response.json();
+  } catch (error) {
+    console.error(error);
+    return undefined;
+  }
+};
+
 export const post = async (endpoint: string, data: string) => {
   try {
     const response = await fetch(`${apiUrl}/${endpoint}`, {

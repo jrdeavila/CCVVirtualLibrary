@@ -3,6 +3,7 @@ import "./App.css";
 import Libro from "./assets/Components/Libro";
 import { DocumentModel } from "./models/document";
 import { fetchDocuments } from "./services/documentService";
+import Barra from "./assets/Components/Barra";
 
 function App() {
   const [docs, setDocs] = useState<DocumentModel[]>([]);
@@ -14,7 +15,7 @@ function App() {
   const getDocuments = async () => {
     let res = await fetchDocuments({
       count: 50,
-      page: 1,
+      page: 12,
       query: "",
     });
     if (!!res) {
@@ -24,6 +25,7 @@ function App() {
   // --------------------------------------------------------------
   return (
     <div className="d-flex flex-wrap justify-content-around">
+      <Barra />
       {docs.map((e: DocumentModel, i: number) => (
         <Libro key={i} nombre={e.title} doc_url={e.pdf} image_url={e.image} />
       ))}
