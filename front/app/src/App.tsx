@@ -15,7 +15,7 @@ function App() {
   const getDocuments = async () => {
     let res = await fetchDocuments({
       count: 50,
-      page: 12,
+      page: 13,
       query: "",
     });
     if (!!res) {
