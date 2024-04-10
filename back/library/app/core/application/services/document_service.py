@@ -29,8 +29,22 @@ class DocumentServiceImpl(DocumentService):
             items = await self._document_repo.get_documents(query)
             self.__refresh_cache__(items, query)
         else:
-            self.__refresh_cache__([Document(**item) for item in items], query)
+            self.__compare_cache__([Document(**item) for item in items], query)
         return items
+
+    def __compare_cache__(self, items: list[Document], query: str | None) -> bool:
+        self._background_task_service.submit_task(
+            self.__compare_cache_documents__, items, query
+        )
+
+    async def __compare_cache_documents__(
+        self, items: list[Document], query: str | None
+    ) -> None:
+        db_items = await self._document_repo.get_documents(query)
+        for item in items:
+            if item not in db_items:
+                self.__refresh_cache__(db_items, query)
+                break
 
     def __refresh_cache__(self, items: list[Document], query: str | None) -> None:
         data = [item.model_dump() for item in items]
