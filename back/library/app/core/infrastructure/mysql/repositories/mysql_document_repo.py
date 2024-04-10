@@ -19,7 +19,7 @@ class MySQLDocumentRepo(DocumentRepo):
             .where(MySQLDocumentModel.status != "ELIMINADO")
             .where(MySQLDocumentModel.subcategory_id != None)
             .where(MySQLDocumentModel.title.like(f"%{query}%") if query else True)
-            .order_by(MySQLDocumentModel.id.asc())
+            .order_by(MySQLDocumentModel.id.desc())
         )
         items = session.scalars(stmt)
         return [item.to_document() for item in items]
