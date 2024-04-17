@@ -29,6 +29,24 @@ function App() {
   const changeSubcategory = (subcategoria: SubcategoryResponse | undefined) => {
     setSubcategoriaSeleccionada(subcategoria);
   };
+
+  const capitalizar = (frase: String) => {
+    let nuevaPalabra = "";
+    let nuevaFrase = "";
+    frase = frase.toLowerCase();
+    let palabras = frase.split(" ");
+    palabras.map((palabra) => {
+      let letras = palabra.split("");
+      letras[0] && letras[0].toUpperCase();
+      for (let i = 0; i < palabra.length; i++) {
+        nuevaPalabra = nuevaPalabra + letras[i];
+      }
+      nuevaFrase = nuevaFrase + nuevaPalabra + " ";
+      nuevaPalabra = "";
+    });
+    console.log(nuevaFrase);
+    return nuevaFrase;
+  };
   // --------------------------------------------------------------
   return (
     <div className="">
@@ -42,7 +60,7 @@ function App() {
               .map((e: DocumentModel, i: number) => (
                 <Libro
                   key={i}
-                  nombre={e.title}
+                  nombre={capitalizar(e.title)}
                   doc_url={e.pdf}
                   image_url={e.image}
                 />
@@ -50,7 +68,7 @@ function App() {
           : docs.map((e: DocumentModel, i: number) => (
               <Libro
                 key={i}
-                nombre={e.title}
+                nombre={capitalizar(e.title)}
                 doc_url={e.pdf}
                 image_url={e.image}
               />
