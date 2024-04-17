@@ -14,8 +14,8 @@ export default function Libro({ nombre = "", image_url = "", doc_url = "" }) {
   }
   //----------------------------------------------------------------------------------
   return (
-    <span className="col-3 text-center border border-primary border-2 rounded p-2 m-1">
-      <a href={complete_doc_url} target="_blank">
+    <span className="col-3 text-center border border-primary p-2 m-1">
+      <a href={complete_doc_url} target="_blank" className="border-2 rounded">
         <img width="200px" className="foto_libro" src={complete_image_url} />
       </a>
       <h3 className="nombreLibro fs-5">{nombre}</h3>
