@@ -5,6 +5,8 @@ import { DocumentModel } from "./models/document";
 import { fetchDocuments } from "./services/documentService";
 import Barra from "./assets/Components/Barra";
 import { SubcategoryResponse } from "./models/category";
+import BarraTitulo from "./assets/Components/BarraTitulo";
+import Buscador from "./assets/Components/Buscador";
 
 function App() {
   const [docs, setDocs] = useState<DocumentModel[]>([]);
@@ -17,12 +19,12 @@ function App() {
   }, []);
   // --------------------------------------------------------------
   const getDocuments = async () => {
-    let res = await fetchDocuments({
+    const res = await fetchDocuments({
       count: 50,
       page: 1,
       query: "",
     });
-    if (!!res) {
+    if (res != undefined) {
       setDocs(res.items);
     }
   };
@@ -30,13 +32,13 @@ function App() {
     setSubcategoriaSeleccionada(subcategoria);
   };
 
-  const capitalizar = (frase: String) => {
+  const capitalizar = (frase: string) => {
     let nuevaPalabra = "";
     let nuevaFrase = "";
     frase = frase.toLowerCase();
-    let palabras = frase.split(" ");
+    const palabras = frase.split(" ");
     palabras.map((palabra) => {
-      let letras = palabra.split("");
+      const letras = palabra.split("");
       letras[0] && letras[0].toUpperCase();
       for (let i = 0; i < palabra.length; i++) {
         nuevaPalabra = nuevaPalabra + letras[i];
@@ -50,6 +52,8 @@ function App() {
   // --------------------------------------------------------------
   return (
     <div className="">
+      <BarraTitulo />
+      <Buscador />
       <Barra sendSubcat={changeSubcategory} />
       <div className="d-flex flex-wrap justify-content-around">
         {subcategoriaSeleccionada

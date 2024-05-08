@@ -17,7 +17,21 @@
   margin:0 20px;
   font-size: 14px;
 }
-.bg-barra{
-  background-color: #f1f1f1;
-  border-bottom: 1px solid black;
+.fondo-azul{
+  background-color: #0070b3;
+  border-radius: 10px 10px 30px 30px;
+  height: 80px;
+}
+.input-busqueda{
+  background-color: white;
+  border: 1px rgba(211, 211, 211, 0.8) solid;
+  width: 30%;
+  border-radius: 30px;
+  padding: 5px 50px;
+  color: black;
+
+}
+.lupa{
+  margin-right: -40px !important;
+  z-index: 2;
 }
