@@ -16,6 +16,11 @@
   height: 30px;
   margin:0 20px;
   font-size: 14px;
+  background-color: transparent;
+  border: 0 transparent solid;
+  color:#0070b3;
+  font-weight: bold;
+  width: max-content;
 }
 .fondo-azul{
   background-color: #0070b3;

@@ -29,11 +29,11 @@ function Barra(props: BarraParams) {
 
   return (
     <div className="row w-100 m-0 border-0 p-0">
-      <nav className="row w-100 row-cols-4 alto-barra p-4 sticky-top d-flex navbar navbar-expand-lg m-0">
+      <nav className="row w-100 d-flex justify-content-center alto-barra p-4 sticky-top d-flex navbar navbar-expand-lg m-0">
         <select
           name="categorias"
           id="categorias"
-          className="alto-50 btn btn-outline-primary btn-sm"
+          className="alto-50 btn btn-sm"
           onChange={(e) => {
             const id: number = Number.parseInt(e.target.value);
             setCategoriaSeleccionada(
@@ -54,7 +54,7 @@ function Barra(props: BarraParams) {
           <select
             name="subcategoria"
             id="subcategoria"
-            className="alto-50 btn btn-outline-primary btn-sm"
+            className="alto-50 btn btn-sm"
             onChange={(e) => {
               const id: number = Number.parseInt(e.target.value);
               setSubcategoriaSeleccionada(
