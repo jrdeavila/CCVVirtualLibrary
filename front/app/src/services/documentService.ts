@@ -6,13 +6,13 @@ export async function fetchDocuments(data: {
   page: number;
   count: number;
 }): Promise<DocumentResponse | undefined> {
-  let res = await get("documents", {
+  const res = await get("documents", {
     query: data.query,
     page: data.page,
     size: data.count,
   });
-  if (!!res) {
-    let documentResponse: DocumentResponse =
+  if (res != undefined) {
+    const documentResponse: DocumentResponse =
       DocumentConvert.toDocumentResponse(res);
     return documentResponse;
   }

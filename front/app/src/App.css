@@ -1,12 +1,16 @@
 .nombreLibro{
-  font-size: 18px;
+  font-size: 14px;
   text-transform: capitalize;
-  
+  margin-top: 0;
+  border-top: #0070b3 solid 2px;
+  padding: 0;
 }
 .foto_libro{
-  width: 200px;
-  height: 200px;
-  object-fit: contain;
+  width: 100%;
+  height:auto;
+  object-fit:cover;
+  padding: 0;
+  margin: 0;
 }
 .alto-barra{
   height: 70px;
@@ -20,7 +24,7 @@
   border: 0 transparent solid;
   color:#0070b3;
   font-weight: bold;
-  width: max-content;
+  width: auto;
 }
 .fondo-azul{
   background-color: #0070b3;
@@ -30,7 +34,7 @@
 .input-busqueda{
   background-color: white;
   border: 1px rgba(211, 211, 211, 0.8) solid;
-  width: 30%;
+  width: 50vw;
   border-radius: 30px;
   padding: 5px 50px;
   color: black;
@@ -40,3 +44,52 @@
   margin-right: -40px !important;
   z-index: 2;
 }
+
+.borde-libro{
+  border: #0070b3 solid 2px;
+  border-radius: 5px;
+  width: 25%;
+  padding: 0;
+  margin: 2vh 2%;
+}
+.page-link{
+  color: #0070b3;
+}
+
+#titulo-biblioteca{
+  font-size: 32px;
+}
+.categoria{
+  text-transform: capitalize;
+}
+@media (min-width:1200px){
+  .borde-libro{ 
+    width: 12%;
+  }
+}
+@media (max-width:1200px){
+  .borde-libro{ 
+    width: 24%;
+    margin: 2vh 0.2%;
+  }
+}
+@media (max-width:608px){
+  .borde-libro{ 
+    width: 49%;
+    margin: 2vh 0.2%;
+  }
+  #logo-camara{
+    width: 150px;
+  }
+  #logo-co{
+    width: 36px;
+  }
+  #logo-libros{
+    width: 24px;
+  }
+  #titulo-biblioteca{
+    font-size: 14px;
+  }
+}
+
+

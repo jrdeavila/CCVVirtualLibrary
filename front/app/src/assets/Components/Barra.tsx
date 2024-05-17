@@ -3,9 +3,10 @@ import { useState, useEffect } from "react";
 import { CategoryResponse, SubcategoryResponse } from "../../models/category";
 interface BarraParams {
   sendSubcat: (categoriaSeleccionada: SubcategoryResponse | undefined) => void;
+  capitalizar: (texto: string | undefined) => string;
 }
 function Barra(props: BarraParams) {
-  const { sendSubcat } = props;
+  const { sendSubcat, capitalizar } = props;
   const [categorias, setCategoria] = useState<CategoryResponse[]>([]);
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState<
     CategoryResponse | undefined
@@ -21,7 +22,7 @@ function Barra(props: BarraParams) {
   }, []);
 
   useEffect(() => {
-    console.log(subcategoriaSeleccionada);
+    // console.log(subcategoriaSeleccionada);
     sendSubcat(subcategoriaSeleccionada);
   }, [subcategoriaSeleccionada]);
 
@@ -33,7 +34,7 @@ function Barra(props: BarraParams) {
         <select
           name="categorias"
           id="categorias"
-          className="alto-50 btn btn-sm"
+          className="alto-50 btn btn-sm categoria"
           onChange={(e) => {
             const id: number = Number.parseInt(e.target.value);
             setCategoriaSeleccionada(
@@ -46,7 +47,7 @@ function Barra(props: BarraParams) {
           </option>
           {categorias.map((e: CategoryResponse, i) => (
             <option key={i} value={e.id} className="fs-6">
-              {e.name}
+              {capitalizar(e.name)}
             </option>
           ))}
         </select>
@@ -54,7 +55,7 @@ function Barra(props: BarraParams) {
           <select
             name="subcategoria"
             id="subcategoria"
-            className="alto-50 btn btn-sm"
+            className="alto-50 btn btn-sm categoria"
             onChange={(e) => {
               const id: number = Number.parseInt(e.target.value);
               setSubcategoriaSeleccionada(
@@ -70,7 +71,7 @@ function Barra(props: BarraParams) {
             {categoriaSeleccionada?.subcategories?.map(
               (sub: SubcategoryResponse, i: number) => (
                 <option key={i} value={sub.id}>
-                  {sub.name}
+                  {capitalizar(sub.name)}
                 </option>
               )
             )}

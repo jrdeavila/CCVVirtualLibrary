@@ -11,7 +11,7 @@ export const get = async (
   paramaters: any
 ): Promise<string | undefined> => {
   try {
-    let params = queryParameters(paramaters);
+    const params = queryParameters(paramaters);
     const response = await fetch(`${apiUrl}/${endpoint}?${params}`, {
       headers: {
         "Content-Type": "application/json",

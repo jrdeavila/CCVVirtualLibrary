@@ -1,4 +1,9 @@
-export default function Buscador() {
+interface Busqueda {
+  sendBusqueda: (busqueda: string) => void;
+}
+export default function Buscador(props: Busqueda) {
+  const { sendBusqueda } = props;
+
   return (
     <div className="row  mt-5">
       <span className="col d-flex justify-content-center align-items-center">
@@ -12,6 +17,13 @@ export default function Buscador() {
           type="search"
           placeholder="Escriba un título para el libro..."
           className="input-busqueda"
+          onChange={(e) => {
+            if (e.target.value.length >= 3) {
+              sendBusqueda(e.target.value);
+            } else if (e.target.value.length == 0) {
+              sendBusqueda("");
+            }
+          }}
         />
       </span>
     </div>
