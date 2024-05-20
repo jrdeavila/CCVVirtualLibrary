@@ -41,17 +41,18 @@ function App() {
     const res = await fetchDocuments({
       count: 50,
       page: n,
-      query: "",
+      query: busqueda,
     });
+
     if (res != undefined) {
-      setPages(res.pages);
+      const paginas = res.pages;
       total = total.concat(res.items);
-      while (n < pages) {
+      while (n < paginas) {
         n = n + 1;
         const res2 = await fetchDocuments({
           count: 50,
           page: n,
-          query: "",
+          query: busqueda,
         });
         if (res2 != undefined) total = total.concat(res2.items);
       }
@@ -66,10 +67,12 @@ function App() {
   useEffect(() => {
     setPaginaActual(1);
     getDocuments();
-  }, [busqueda, pages]);
+  }, [busqueda]);
 
   useEffect(() => {
-    getDocuments();
+    if (subcategoriaSeleccionada == undefined) {
+      getDocuments();
+    }
   }, [paginaActual]);
 
   useEffect(() => {
@@ -123,7 +126,8 @@ function App() {
         {subcategoriaSeleccionada
           ? totalDocs
               .filter(
-                (doc) => doc.subcategory.id === subcategoriaSeleccionada?.id
+                (doc: DocumentModel) =>
+                  doc.subcategory.id == subcategoriaSeleccionada.id
               )
               .map((e: DocumentModel, i: number) => (
                 <Libro
@@ -143,11 +147,15 @@ function App() {
             ))}
       </div>
       <nav aria-label="Page navigation example">
-        <ListaNumeros
-          cantidad={pages}
-          paginaActual={paginaActual}
-          cambiarPagina={changePaginaActual}
-        />
+        {subcategoriaSeleccionada ? (
+          <p></p>
+        ) : (
+          <ListaNumeros
+            cantidad={pages}
+            paginaActual={paginaActual}
+            cambiarPagina={changePaginaActual}
+          />
+        )}
       </nav>
     </div>
   );

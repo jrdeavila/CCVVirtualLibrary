@@ -65,7 +65,7 @@ function Barra(props: BarraParams) {
               );
             }}
           >
-            <option key="-1" value="0" defaultChecked>
+            <option key="-1" value="" defaultChecked>
               Seleccione una Subcategoría
             </option>
             {categoriaSeleccionada?.subcategories?.map(
