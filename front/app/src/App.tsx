@@ -158,7 +158,7 @@ function App() {
         )}
       </nav>
     </div>
-  );
+  ); 
 }
 
 export default App;
