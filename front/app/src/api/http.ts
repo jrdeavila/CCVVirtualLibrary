@@ -1,4 +1,9 @@
-const apiUrl = "http://localhost:8000";
+
+const host: string = window.location.hostname;
+// Get API URL from environment variable
+const apiUrl =  `http://${host}:8000`;
+
+console.log("API URL: ", apiUrl)
 
 function queryParameters(paramaters: any): string {
   return Object.keys(paramaters)
