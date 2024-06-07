@@ -1,14 +1,16 @@
-version: '3.7'
-
 services:
   frontend-library:
     build: 
       context: front
       dockerfile: docker/development 
     ports:
-      - 3000:80
+      - 5173:5173
     volumes:
       - ./front/app:/usr/src/app
+    depends_on:
+      - backend-library
+    environment:
+      - API_URL=http://backend-library:8000
 
   backend-library:
     build: 
@@ -26,9 +28,12 @@ services:
       - DB_NAME=${MYSQL_DBNAME}
       - REDIS_HOST=redis
       - REDIS_PORT=6379
+    depends_on:
+      - redis
     
   redis:
     image: redis:alpine
     ports:
       - 6379:6379
+
     
